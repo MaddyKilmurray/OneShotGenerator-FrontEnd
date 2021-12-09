@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private readonly baseUrl:string = "http://localhost:8300/api/users"  
+  private readonly baseUrl:string = "http://localhost:8000/api/users"  
 
   constructor(private http:HttpClient) {}
 
@@ -21,13 +21,8 @@ export class UserService {
     return this.http.post<any>(this.baseUrl + "/validate/email",body);
   }
 
-  getCurrentUser(): Observable<any> {
-    return this.http.get<any>(this.baseUrl + "/authenticated");
-  }
-
-  updateUserPassword(password:string):Observable<any> {
-    const body = { "password": password };
-    return this.http.patch(this.baseUrl + "/authenticated/update",body);
+  getCurrentUser(email:string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + email);
   }
 
   updateUserDM(isDm:boolean):Observable<any> {
@@ -40,10 +35,9 @@ export class UserService {
     return this.http.patch(this.baseUrl + "/authenticated/update",body);
   }
 
-  createUser(username:string,password:string,email:string,isDm:boolean,partyId:number):Observable<any> {
+  createUser(username:string,email:string,isDm:boolean,partyId:number):Observable<any> {
     const body = {
       "username":username,
-      "password":password,
       "email":email,
       "dm":isDm,
       "partyId":partyId

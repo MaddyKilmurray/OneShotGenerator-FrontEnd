@@ -9,10 +9,10 @@
           <li>
             <a class="menu-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
           </li>
-          <li *ngIf="isAuthenticated">
+          <li *ngIf="(authService.authState$ | async)?.isAuthenticated">
             <a class="menu-item" routerLink="/create" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Create</a>
           </li>
-          <li *ngIf="isAuthenticated">
+          <li *ngIf="(authService.authState$ | async)?.isAuthenticated">
             <a class="menu-item" routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">My Profile</a>
           </li>
           <li *ngIf="(authService.authState$ | async)?.isAuthenticated">

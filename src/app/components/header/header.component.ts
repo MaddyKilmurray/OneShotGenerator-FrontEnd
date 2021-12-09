@@ -27,16 +27,10 @@ import { OktaAuth } from '@okta/okta-auth-js';
 })
 export class HeaderComponent {
 
-  isAuthenticated = false;
-
   showNavigation:boolean;
 
   constructor(public oktaAuth: OktaAuth,public authService: OktaAuthStateService) {
     this.showNavigation = false;
-
-    this.oktaAuth.authStateManager.subscribe(
-      (isAuthenticated: boolean) => this.isAuthenticated = isAuthenticated
-    );
   }
 
   switchNav(): void {

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class CharacterService {
 
   readonly gatewayUrl: string = "http://localhost:8000/api/create"
-  readonly baseUrl: string = "http://localhost:8600/api/create";
+  readonly baseUrl: string = "http://localhost:8000/api/create";
 
   constructor(private http: HttpClient) { }
 
@@ -33,7 +33,7 @@ export class CharacterService {
       savingThrows: character.saving_throws,
       spellCasting: character.spellcasting
     }
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(this.baseUrl + "/view", body,{'headers':headers});
+    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(this.baseUrl + "/view", body);
   }
 }
