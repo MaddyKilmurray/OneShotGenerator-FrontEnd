@@ -1,0 +1,27 @@
+<div class="header">
+
+    <div class="logo" (click)="switchNav()">
+        <img class="logo_img" src="assets\crossed-swords.png" alt="Two swords, crossed over each other to make an X, on a transparent background">
+    </div>
+
+    <nav class="navigation" [@showNav]="showNavigation ? 'show' : 'hide'">
+        <ul class="menu">
+          <li>
+            <a class="menu-item" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+          </li>
+          <li *ngIf="isAuthenticated">
+            <a class="menu-item" routerLink="/create" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Create</a>
+          </li>
+          <li *ngIf="isAuthenticated">
+            <a class="menu-item" routerLink="/profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">My Profile</a>
+          </li>
+          <li *ngIf="(authService.authState$ | async)?.isAuthenticated">
+            <a class="menu-item" (click)="oktaAuth.signOut()">Log out</a>
+          </li>
+          <li *ngIf="!(authService.authState$ | async)?.isAuthenticated" >
+            <a class="menu-item" (click)="oktaAuth.signInWithRedirect()">Sign In</a>
+          </li>
+    
+        </ul>
+      </nav>
+</div>

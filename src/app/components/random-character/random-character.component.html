@@ -1,0 +1,38 @@
+<div class="main">
+
+    <div class="main-body">
+
+        Character name: {{ characterName}} <br />
+        Party ID: {{ partyId }}
+        <div class="generated-details">
+            <div class="race-details">
+                Race: {{ generatedCharacter.race }} <br />
+                Speed: {{ generatedCharacter.speed }} <br />
+                Ability score: {{ generatedCharacter.abilityScore }} <br />
+                Size: {{ generatedCharacter.size }} <br />
+                Languages: {{ generatedCharacter.languages }} <br />
+                Traits: {{ generatedCharacter.traits }} <br />
+            </div>
+            <br />
+            <div class="class-details">
+                Class: {{ generatedCharacter.char_class }} <br />
+                Hit die: {{ generatedCharacter.hit_die }} <br />
+                Weapon proficiencies: {{ generatedCharacter.weaponProficiencies}} <br />
+                Proficiency: {{ generatedCharacter.proficiency }} <br />
+                Spellcasting: {{ generatedCharacter.spellcasting }}
+            </div>
+        </div>
+
+        <button class="roll-stats" (click)="generateCharacter()">
+            Roll stats
+        </button>
+
+        <br />
+        <div class="generated">
+            Alignment: {{ fullCharacter.alignment }} <br />
+            Starter Weapon: {{ fullCharacter.startingWeapon }} <br />
+            Starter Armour: {{ fullCharacter.startingArmour }} <br />
+        </div>
+
+    </div>
+</div>

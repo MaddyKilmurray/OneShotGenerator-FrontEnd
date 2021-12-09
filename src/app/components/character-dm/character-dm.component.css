@@ -1,0 +1,101 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width:100%;
+    height:fit-content;
+    padding-bottom: 10%;
+    color: #06070E;
+    font-family: 'Satisfy', cursive;
+}
+
+.main h2 {
+    display: flex;
+    justify-content: center;
+}
+
+.splitter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    width:100%;
+    height:100%;
+    color: #06070E;
+    margin:auto
+}
+
+.main-body, .random-view {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    background-color: #DBEBC0;
+    border-radius: 5px;
+    width:90%;
+    height:fit-content;
+    margin: auto;
+}
+
+h2 {
+    font-size: 400%;
+    padding: 5%;
+}
+
+p {
+    font-size: 400%;
+    padding: 5%;
+}
+
+h3 {
+    font-size: 150%;
+    padding: 5%;
+    margin: 5%;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5;
+    width: 40%;
+    height: 40%;
+    margin: auto;
+}
+
+.link-right p {
+    font-size: 200%;
+}
+
+.main-body h2 {
+    font-size: 200%;
+}
+
+.partyForm {
+    margin: auto;
+    background-color: #06070E;
+    padding: 2%;
+    border-radius: 5px;
+    margin-bottom: 5%;
+}
+
+.submit {
+    width: 30%;
+    height: 20%;
+}
+
+.submit p {
+    font-size: 150%;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .main-body {
+        padding-bottom: 10%;
+    }
+
+    button {
+        width: 80%;
+        margin: auto;
+    }
+}

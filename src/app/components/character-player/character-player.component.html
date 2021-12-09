@@ -1,0 +1,38 @@
+<div class="main">
+
+    <div class="main-body" *ngIf="!showCustomView && !showRandomView">
+        <h2 class="header">Time to create a character!</h2>
+        <div class="splitter">
+            <form class="charForm" [formGroup]="characterForm">
+
+                <mat-form-field class="example-will-width" appearance="fill">
+                    <mat-label>Character Name</mat-label>
+                    <input type="text" matInput formControlName="characterName" placeholder="Name...">
+                    <mat-error *ngIf="characterName.invalid && characterName.touched">
+                        Please enter a valid (and cool) name.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-will-width" appearance="fill">
+                    <mat-label>Set Your Party ID</mat-label>
+                    <input type="number" matInput formControlName="partyId" placeholder="Party ID...">
+                    <mat-error *ngIf="partyId.invalid && partyId.touched">
+                        Your party ID must be 6 or more digits
+                    </mat-error>
+                </mat-form-field>
+
+            </form>
+
+            <button class="link-right" (click)="switchRandomView()">
+                <p>Randomise your character</p>
+            </button>
+        </div>
+        <button class="back" (click)="sentBack()">
+            Start again
+        </button>
+    </div>
+
+    <div class="random-view" *ngIf="showRandomView">
+        <app-random-character [class]="randomClass()" [race]="randomRace()" [characterName]="characterName.value" [partyId]="partyId.value"></app-random-character>
+    </div>
+</div>

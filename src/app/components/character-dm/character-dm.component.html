@@ -1,0 +1,27 @@
+<div class="main">
+
+    <h2>What would you like to do?</h2>
+
+    <div class="splitter">
+        <div class="main-body">
+            <h2>Create new Party ID</h2>
+            <form class="partyForm" [formGroup]="partyForm">
+                <mat-form-field class="example-will-width" appearance="standard">
+                    <mat-label>Party ID must be at least 6 digits</mat-label>
+                    <input type="number" matInput formControlName="partyId" placeholder="Party ID...">
+                    <mat-error *ngIf="partyId.invalid && partyId.touched">
+                        Please enter a valid party ID
+                    </mat-error>
+                </mat-form-field>
+            </form>
+            <button class="submit" (click)="onSubmit()"><p>Submit</p></button>
+        </div>
+
+        <div class="random-view">
+            <button class="link-right" routerLink="/player" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <p>Create a random character</p>
+            </button>
+        </div>
+    </div>
+</div>

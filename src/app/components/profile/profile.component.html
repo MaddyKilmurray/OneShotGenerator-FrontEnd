@@ -1,0 +1,35 @@
+<div class="main">
+
+    <div class="main-body">
+        <div class="splitter">
+            <div class="profile">
+
+                <h2>Your profile:</h2>
+                <p>Name: {{ userFullName }}</p>
+                <p>Email: {{ userEmail }}</p>
+                <p>Are you a DM?: {{ userDm }}</p>
+                <p>Party Id: {{partyId}}</p>
+
+            </div>
+
+            <div class="character-list">
+                <ul>
+                    <li *ngFor="let char of chars">
+                        Character name: {{ char.characterName }}
+                        Race: {{ char.race }}, Class: {{ char.char_class }}
+                        Level: {{ char.level }}, Exp: {{ char.experience }}, Alignment: {{ char.alignment }}
+                        Str: {{ char.strength }}, Dex: {{ char.dexterity }}, Con: {{ char.constitution }}
+                        Int: {{ char.intelligence }}, Wis: {{ char.wisdom }}, Cha: {{ char.charisma }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="logo">
+            <img src="assets\dragon.png"
+                alt="A blueish, reddish dragon, with two feet, has its wings extended and is roaring at you">
+        </div>
+    </div>
+
+
+</div>

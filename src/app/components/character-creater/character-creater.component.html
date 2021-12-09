@@ -1,0 +1,19 @@
+<div class="main">
+
+    <div class="main-body" *ngIf="!showDM">
+        <h2 class="header">Are you a...?</h2>
+        <div class="splitter">
+            <button class="link-left" (click)="switchDM()">
+                <p>DM</p>
+            </button>
+            <button class="link-right" routerLink="/player" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                <p>Player</p>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-body dm" *ngIf="showDM"> <!--WILL BE CHANGED TO A ROUTE-->
+        <app-character-dm></app-character-dm>
+    </div>
+
+</div>

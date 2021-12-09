@@ -1,0 +1,38 @@
+<div class="main">
+
+  <div class="main-body">
+
+      <div class="logged-in" *ngIf="(authService.authState$ | async)?.isAuthenticated">
+
+          <h1>Welcome back, {{userName}}</h1>
+
+          <h3>It's nearly time to go on your next adventure.</h3>
+
+      </div>
+
+      <div class="not-logged-in" *ngIf="!(authService.authState$ | async)?.isAuthenticated">
+          <h1>D&D 5E One Shot Generator</h1>
+          <h3>Fans probably know this better than anyone, but one of the major downfalls of Dungeons & Dragons is just
+              how much time it can take to finish a campaign. For those who have dense schedules, kids, or other
+              obligations, this kind of
+              time might seem impossible to come by. Fortunately, there are still ways to play D&D, even with a strict
+              schedule...</h3>
+
+          <h2>By playing a D&D One Shot! </h2>
+
+          <h3>A one shot is a single, short session, and can be played as an indepent game, or as part of a larger
+              campaign.</h3>
+          <h3>Generate everything that you need for a quick oneshot with our D&D 5E One Shot generator. Players can
+              randomly generate their characters, and Dungeon Masters can create a party to bring all the characters
+              together.</h3>
+
+          <h2>Are you a player looking to generate a new character? Or are you a DM looking to set up a party? Click <a (click)="oktaAuth.signInWithRedirect()">here</a> to login or create an account.</h2>
+      </div>
+
+      <div class="logo">
+          <img src="assets\dragon.png"
+              alt="A blueish, reddish dragon, with two feet, has its wings extended and is roaring at you">
+      </div>
+
+  </div>
+</div>
