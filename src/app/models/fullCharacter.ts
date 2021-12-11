@@ -1,4 +1,16 @@
 export class FullCharacter {
+    public get hitPoints(): number {
+        return this._hitPoints;
+    }
+    public set hitPoints(value: number) {
+        this._hitPoints = value;
+    }
+    public get partyId(): number {
+        return this._partyId;
+    }
+    public set partyId(value: number) {
+        this._partyId = value;
+    }
     public get charismaModifier(): number {
         return this._charismaModifier;
     }
@@ -233,6 +245,7 @@ export class FullCharacter {
         private _playerId: number,
         private _characterName: string,
         private _level: number,
+        private _partyId: number,
         private _experience: number,
         private _alignment: string,
         private _startingWeapon: string,
@@ -251,6 +264,7 @@ export class FullCharacter {
         private _traits: string,
         private _charClass: string,
         private _hitDie: number,
+        private _hitPoints: number,
         private _classSkills: string,
         private _classProficiencies: string,
         private _savingThrows: string,

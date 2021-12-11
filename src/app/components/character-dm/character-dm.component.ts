@@ -4,7 +4,8 @@ import { UserService } from './../../service/user.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { OktaAuth } from '@okta/okta-auth-js';
-import { User } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/models/user.model';
+import { UserModelResponse } from 'src/app/models/backendUser';
 
 @Component({
   selector: 'app-character-dm',
@@ -18,7 +19,7 @@ export class CharacterDmComponent implements OnInit {
   partyForm:FormGroup;
   partyId:FormControl;
 
-  user:User;
+  user:UserModel;
 
   constructor(public oktaAuth: OktaAuth,public userService:UserService,
     private snackbar:MatSnackBar) { 
@@ -28,7 +29,7 @@ export class CharacterDmComponent implements OnInit {
       partyId:this.partyId
     })
 
-    this.user = new User('',0,'',false);
+    this.user = new UserModel(0,'',0,'',false);
   }
 
   async ngOnInit() {
@@ -38,29 +39,32 @@ export class CharacterDmComponent implements OnInit {
 
       this.email = userClaims.preferred_username;
     }
-    this.getUser(this.email!);
+    this.getUser();
   }
 
   // writes partyID to DM user profile
   onSubmit() : void {
     this.userService.updateUserPartyId(this.email!,this.partyId.value).subscribe(
       result => {
-        this.openSnackBar("Party ID " + this.partyId.value + " created","Close");
-        this.getUser(this.email!);
+        this.snackbar.open("Party ID " + this.partyId.value + " created","Close", {
+          duration: 2000
+        });
+        this.getUser();
       }
     )
   }
 
-  getUser(email:string) {
-    this.userService.getCurrentUser(email).subscribe(
+  getUser() {
+    this.userService.getCurrentUser(this.email!).subscribe(
       result => {
-        this.user = result
+        const userModel:UserModelResponse = result;
+        this.user.id = userModel.id;
+        this.user.username = userModel.username;
+        this.user.partyId = userModel.partyId;
+        this.user.email = userModel.email;
+        this.user.isDM = userModel.dm;
       }
     )
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackbar.open(message, action);
   }
 
 }

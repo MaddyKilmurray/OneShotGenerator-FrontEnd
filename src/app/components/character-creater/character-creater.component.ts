@@ -2,7 +2,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { OktaAuth } from '@okta/okta-auth-js';
-import { User } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/models/user.model';
+import { UserModelResponse } from 'src/app/models/backendUser';
 
 @Component({
   selector: 'app-character-creater',
@@ -13,12 +14,14 @@ export class CharacterCreaterComponent implements OnInit {
 
   showDM:boolean;
 
-  user:User;
+  email: string | undefined;
+
+  user:UserModel;
 
   constructor(public oktaAuth:OktaAuth, public userService:UserService,
     private snackbar:MatSnackBar) {
     this.showDM = false;
-    this.user = new User('',0,'',false);
+    this.user = new UserModel(0,'',0,'',false);
   }
 
   async ngOnInit() {
@@ -26,7 +29,8 @@ export class CharacterCreaterComponent implements OnInit {
 
       const userClaims = await this.oktaAuth.getUser()
 
-      this.getUser(userClaims.preferred_username!);
+      this.email = userClaims.preferred_username;
+      this.getUser();
     }
   }
 
@@ -34,16 +38,17 @@ export class CharacterCreaterComponent implements OnInit {
     this.showDM = !this.showDM;
   }
 
-  getUser(email:string) {
-    this.userService.getCurrentUser(email).subscribe(
+  getUser() {
+    this.userService.getCurrentUser(this.email!).subscribe(
       result => {
-        this.user = result
+        const userModel:UserModelResponse = result;
+        this.user.id = userModel.id;
+        this.user.username = userModel.username;
+        this.user.partyId = userModel.partyId;
+        this.user.email = userModel.email;
+        this.user.isDM = userModel.dm;
       }
     )
-  }
-
-  openSnackBar(message: string, action: string) {
-    this.snackbar.open(message, action);
   }
 
 }

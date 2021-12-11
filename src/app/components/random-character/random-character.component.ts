@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FullCharacterResponse, FullCharacterInfo } from './../../models/fullCharacter.model';
 import { CharacterService } from './../../service/character.service';
 import { FullCharacter } from './../../models/fullCharacter';
@@ -26,12 +27,14 @@ export class RandomCharacterComponent implements OnInit {
   @Input() class!: string;
   @Input() characterName!: string;
   @Input() partyId!: number;
+  @Input() playerId!: number;
 
 
-  constructor(private dndService: DndApiService, private characterService: CharacterService) {
+  constructor(private dndService: DndApiService, private characterService: CharacterService,
+    private snackbar:MatSnackBar) {
     
     this.generatedCharacter = new CharacterDetail(this.partyId,this.characterName,'', 0, '', 0, '', '', '', '', '', '', 0, '', '', '', '');
-    this.fullCharacter = new FullCharacter(this.partyId,this.characterName, 0, 0, '', '', '', '', '', 0, '', 0, '', 0, '', '', '', '', '', '', 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    this.fullCharacter = new FullCharacter(this.playerId,this.characterName, 0, this.partyId,0, '', '', '', '', '', 0, '', 0, '', 0, '', '', '', '', '', '',0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   }
 
   ngOnInit(): void {
@@ -49,7 +52,7 @@ export class RandomCharacterComponent implements OnInit {
   }
 
   generateCharacter(): void {
-    this.fullCharacter = new FullCharacter(this.partyId,this.characterName, 0, 0, '', '', '', '', '', 0, '', 0, '', 0, '', '', '', '', '', '', 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    this.fullCharacter = new FullCharacter(this.playerId,this.characterName, 0, this.partyId, 0, '', '', '', '', '', 0, '', 0, '', 0, '', '', '', '', '', '', 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     var playerId = 1; // WORK OUT HOW TO PASS PLAYER ID
     this.generatedCharacter.player_id = playerId;
     this.characterService.generateCharacter(this.generatedCharacter).subscribe(result => {
@@ -58,6 +61,7 @@ export class RandomCharacterComponent implements OnInit {
       this.fullCharacter.playerId = fullCharacterResponse.playerId;
       this.fullCharacter.characterName = fullCharacterResponse.characterName;
       this.fullCharacter.level = fullCharacterResponse.level;
+      this.fullCharacter.partyId = fullCharacterResponse.partyId;
       this.fullCharacter.experience = fullCharacterResponse.experience;
       this.fullCharacter.alignment = fullCharacterResponse.alignment;
       this.fullCharacter.startingWeapon = fullCharacterResponse.startingWeapon;
@@ -76,6 +80,7 @@ export class RandomCharacterComponent implements OnInit {
       this.fullCharacter.traits = fullCharacterResponse.traits;
       this.fullCharacter.charClass = fullCharacterResponse.charClass;
       this.fullCharacter.hitDie = fullCharacterResponse.hitDice;
+      this.fullCharacter.hitPoints = fullCharacterResponse.hitPoints;
       this.fullCharacter.classSkills = fullCharacterResponse.classSkills;
       this.fullCharacter.classProficiencies = fullCharacterResponse.classProficiencies;
       this.fullCharacter.savingThrows = fullCharacterResponse.savingThrows;
@@ -98,7 +103,9 @@ export class RandomCharacterComponent implements OnInit {
 
   saveCharacter(): void {
     this.characterService.saveCharacter(this.fullCharacter).subscribe(result => {
-      console.log(result)
+      this.snackbar.open('Character saved', 'Close', {
+        duration: 2000
+      });
     })
   }
 

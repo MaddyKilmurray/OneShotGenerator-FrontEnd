@@ -33,6 +33,6 @@
     </div>
 
     <div class="random-view" *ngIf="showRandomView">
-        <app-random-character [class]="randomClass()" [race]="randomRace()" [characterName]="characterName.value" [partyId]="partyId.value"></app-random-character>
+        <app-random-character [class]="randomClass()" [race]="randomRace()" [characterName]="characterName.value" [partyId]="partyId.value" [playerId]="user.id"></app-random-character>
     </div>
 </div>

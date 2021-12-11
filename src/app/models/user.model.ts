@@ -1,4 +1,10 @@
-export class User {
+export class UserModel {
+    public get id(): number {
+        return this._id;
+    }
+    public set id(value: number) {
+        this._id = value;
+    }
     public get username(): string {
         return this._username;
     }
@@ -25,9 +31,11 @@ export class User {
     }
 
     constructor(
+        private _id: number,
         private _username: string,
         private _partyId: number,
         private _email: string,
         private _isDM: boolean,
     ){}
 }
+

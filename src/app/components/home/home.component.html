@@ -12,8 +12,8 @@
                 <img src="assets\divider.png" alt="Black page divider, two black lines with a circle in the middle.">
             </div>
 
-            <div class="chars">
-                <h1 *ngIf="characters != null">Your characters</h1>
+            <div class="chars" *ngIf="characters.length != 0; else create">
+                <h1>Your characters</h1>
                 <ul>
                     <li *ngFor="let char of characters">
                         <div class="char_img">
@@ -28,6 +28,18 @@
                     </li>
                 </ul>
             </div>
+            <ng-template #create>
+                <div class="no-chars">
+                    <h1>You haven't created any characters yet.</h1>
+                    <p>Why not make one now?</p>
+
+                    <button class="link-right" routerLink="/player" routerLinkActive="active"
+                        [routerLinkActiveOptions]="{exact:true}">
+                        <p>Create a character</p>
+                    </button>
+                </div>
+            </ng-template>
+
 
         </div>
 

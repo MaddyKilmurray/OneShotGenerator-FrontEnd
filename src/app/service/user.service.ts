@@ -1,8 +1,8 @@
-import { User } from './../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FullCharacter } from '../models/fullCharacter';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class UserService {
   }
 
   getCurrentUser(email:string): Observable<any> {
-    return this.http.get<User>(this.baseUrl + "/by_email/" + email);
+    return this.http.get<UserModel>(this.baseUrl + "/by_email/" + email);
   }
 
   updateUserDM(isDm:boolean):Observable<any> {

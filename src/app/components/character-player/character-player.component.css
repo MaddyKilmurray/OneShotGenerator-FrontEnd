@@ -20,14 +20,14 @@
     padding: 2%;
 }
 
-h2 {
+.main-body h2 {
     font-size: 400%;
     padding: 5%;
-}
-
-.header {
-    display: flex;
-    justify-content: center;
+    padding-bottom: 2%;
+    margin: auto;
+    text-align: center;
+    line-height: 1.5;
+    font-family: 'Satisfy', cursive;
 }
 
 .splitter {

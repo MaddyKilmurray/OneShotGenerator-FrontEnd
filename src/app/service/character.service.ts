@@ -42,6 +42,7 @@ export class CharacterService {
     const body = {
       playerId: character.playerId,
       characterName: character.characterName,
+      partyId: character.partyId,
       level:character.level,
       experience:character.experience,
       alignment:character.alignment,
@@ -62,6 +63,7 @@ export class CharacterService {
       traits: character.traits,
       charClass: character.charClass,
       hitDice: character.hitDie,
+      hitPoints: character.hitPoints,
       classSkills: character.classSkills,
       classProficiencies: character.classProficiencies,
       savingThrows: character.savingThrows,

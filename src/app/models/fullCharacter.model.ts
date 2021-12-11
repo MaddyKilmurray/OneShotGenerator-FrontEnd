@@ -17,6 +17,7 @@ export interface FullCharacterInfo {
         id: number,
         playerId: number,
         characterName: string,
+        partyId: number,
         level: number,
         experience: number,
         alignment: string,

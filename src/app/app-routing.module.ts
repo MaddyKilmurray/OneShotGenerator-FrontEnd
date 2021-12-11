@@ -38,10 +38,10 @@ const routes: Routes = [
     canActivate: [OktaAuthGuard],
     data: { onAuthRequired }
   },
-  {
-    path: '**',
-    component: DefaultComponent
-  }
+  // {
+  //   path: '**',
+  //   component: DefaultComponent
+  // }
 ];
 
 export function onAuthRequired(oktaAuth: OktaAuth, injector: Injector): void {

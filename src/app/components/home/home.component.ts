@@ -5,7 +5,8 @@ import { RandomiserService } from './../../service/randomiser.service';
 import { Component, OnInit } from '@angular/core';
 import { OktaAuthStateService } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
-import { User } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/models/user.model';
+import { UserModelResponse } from 'src/app/models/backendUser';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class HomeComponent implements OnInit {
 
-  user:User;
+  user:UserModel;
 
   userName: string | undefined
   email: string | undefined;
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
 
   constructor(public oktaAuth: OktaAuth, public authService: OktaAuthStateService,
     public userService: UserService, public charService: CharacterService) {
-      this.user = new User('',0,'',false);
+      this.user = new UserModel(0,'',0,'',false);
       this.characters = [];
   }
 
@@ -39,7 +40,7 @@ export class HomeComponent implements OnInit {
       this.email = userClaims.preferred_username;
 
       this.validateEmail();
-      this.getUser(this.email!);
+      this.getUser();
       this.getCharacters();
     }
   }
@@ -60,10 +61,16 @@ export class HomeComponent implements OnInit {
 
   }
 
-  getUser(email:string) {
-    this.userService.getCurrentUser(email).subscribe(
+  getUser() {
+    console.log(this.email!);
+    this.userService.getCurrentUser(this.email!).subscribe(
       result => {
-        this.user = result
+        const userModel:UserModelResponse = result;
+        this.user.id = userModel.id;
+        this.user.username = userModel.username;
+        this.user.partyId = userModel.partyId;
+        this.user.email = userModel.email;
+        this.user.isDM = userModel.dm;
       }
     )
   }
@@ -72,7 +79,6 @@ export class HomeComponent implements OnInit {
     this.userService.getCharacters(this.email!).subscribe(
       result => {
         this.characters = result;
-        console.log(this.characters);
       }
     )
   }

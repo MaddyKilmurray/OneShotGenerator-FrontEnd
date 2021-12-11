@@ -1,4 +1,4 @@
-import { User } from 'src/app/models/user.model';
+import { UserModel } from 'src/app/models/user.model';
 import { UserService } from './../../service/user.service';
 import { FullCharacter } from './../../models/fullCharacter';
 import { HttpClient } from '@angular/common/http';
@@ -19,13 +19,13 @@ export class ProfileComponent implements OnInit {
   partyId:string | undefined;
 
   characters:FullCharacter[]
-  user:User;
+  user:UserModel;
 
   constructor(private oktaAuth:OktaAuth,
     private http:HttpClient, private userService:UserService) { 
 
       this.characters = [];
-      this.user = new User('',0,'',false);
+      this.user = new UserModel(0,'',0,'',false);
     }
 
     async ngOnInit() {
