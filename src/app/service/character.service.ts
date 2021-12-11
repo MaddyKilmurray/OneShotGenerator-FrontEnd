@@ -1,7 +1,7 @@
 import { FullCharacter } from './../models/fullCharacter';
 import { CharacterDetail } from './../models/characterDetail.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, enableProdMode } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -40,7 +40,7 @@ export class CharacterService {
 
   saveCharacter(character: FullCharacter): Observable<any> {
     const body = {
-      playerId: character.player_id,
+      playerId: character.playerId,
       characterName: character.characterName,
       level:character.level,
       experience:character.experience,
@@ -60,14 +60,28 @@ export class CharacterService {
       weaponProficiencies: character.weaponProficiencies,
       languages: character.languages,
       traits: character.traits,
-      charClass: character.char_class,
-      hitDice: character.hit_die,
-      classSkills: character.class_skills,
-      classProficiencies: character.class_proficiencies,
-      savingThrows: character.saving_throws,
-      spellCasting: character.spellcasting
+      charClass: character.charClass,
+      hitDice: character.hitDie,
+      classSkills: character.classSkills,
+      classProficiencies: character.classProficiencies,
+      savingThrows: character.savingThrows,
+      spellCasting: character.spellcasting,
+
+      strength: character.strength,
+      strengthModifier: character.strengthModifier,
+      dexterity: character.dexterity,
+      dexterityModifier: character.dexterityModifier,
+      constitution: character.constitution,
+      constitutionModifier: character.constitutionModifier,
+      intelligence: character.intelligence,
+      intelligenceModifier: character.intelligenceModifier,
+      wisdom: character.wisdom,
+      wisdomModifier: character.wisdomModifier,
+      charisma: character.charisma,
+      charismaModifier: character.charismaModifier,
+      armourClass: character.armourClass
     }
     // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(this.baseUrl + "/view", body);
+    return this.http.post<any>(this.baseUrl + "/save", body);
   }
 }

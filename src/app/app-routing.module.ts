@@ -33,13 +33,13 @@ const routes: Routes = [
     data: { onAuthRequired }
   },
   {
-    path: 'dm',
+    path: 'gamemaster',
     component: CharacterDmComponent,
     canActivate: [OktaAuthGuard],
     data: { onAuthRequired }
   },
   {
-    path: '*',
+    path: '**',
     component: DefaultComponent
   }
 ];

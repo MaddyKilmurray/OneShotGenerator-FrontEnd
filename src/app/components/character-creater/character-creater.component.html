@@ -1,19 +1,34 @@
 <div class="main">
 
     <div class="main-body" *ngIf="!showDM">
-        <h2 class="header">Are you a...?</h2>
-        <div class="splitter">
-            <button class="link-left" (click)="switchDM()">
-                <p>DM</p>
+        <div class="general" *ngIf="user.isDM; else dmSection">
+            <h2 class="header">Will you be a...?</h2>
+            <div class="splitter">
+                <button class="link-left" routerLink="/gamemaster" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact:true}">
+                    <p>Game Master</p>
+                </button>
+                <button class="link-right" routerLink="/player" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact:true}">
+                    <p>Player</p>
+                </button>
+            </div>
+        </div>
+        <ng-template #dmSection>
+            
+            <h2 class="header">Welcome back Games Master!</h2>
+            <div class="splitter">
+            <button class="link-left" routerLink="/gamemaster" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <p>Show GM Menu</p>
             </button>
-            <button class="link-right" routerLink="/player" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
-                <p>Player</p>
+
+            <button class="link-right" routerLink="/player" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+                <p>Create a Character</p>
             </button>
         </div>
-    </div>
-
-    <div class="main-body dm" *ngIf="showDM"> <!--WILL BE CHANGED TO A ROUTE-->
-        <app-character-dm></app-character-dm>
+        </ng-template>
     </div>
 
 </div>

@@ -1,6 +1,8 @@
+import { User } from './../models/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { FullCharacter } from '../models/fullCharacter';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,10 @@ export class UserService {
   private readonly baseUrl:string = "http://localhost:8300/api/users"  
 
   constructor(private http:HttpClient) {}
+
+  getCharacters(email:string) : Observable<FullCharacter[]> {
+    return this.http.get<FullCharacter[]>(this.baseUrl + "/characters/" + email);
+  }
 
   validateUsername(username:string) : Observable<any> {
     const body = { "username": username };
@@ -22,7 +28,7 @@ export class UserService {
   }
 
   getCurrentUser(email:string): Observable<any> {
-    return this.http.get<any>(this.baseUrl + email);
+    return this.http.get<User>(this.baseUrl + "/by_email/" + email);
   }
 
   updateUserDM(isDm:boolean):Observable<any> {
@@ -30,9 +36,8 @@ export class UserService {
     return this.http.patch(this.baseUrl + "/authenticated/update",body);
   }
 
-  updateUserPartyId(partyId:string):Observable<any> {
-    const body = { "partyId": partyId };
-    return this.http.patch(this.baseUrl + "/authenticated/update",body);
+  updateUserPartyId(email:string,partyId:string):Observable<any> {
+    return this.http.put(this.baseUrl + "/update/partyId/" + email,partyId);
   }
 
   createUser(username:string,email:string,isDm:boolean,partyId:number):Observable<any> {
@@ -42,6 +47,6 @@ export class UserService {
       "dm":isDm,
       "partyId":partyId
     }
-    return this.http.post<any>(this.baseUrl,body);
+    return this.http.post<any>(this.baseUrl + "/register",body);
   }
 }

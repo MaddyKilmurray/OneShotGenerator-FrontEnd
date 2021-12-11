@@ -5,18 +5,21 @@
             <div class="profile">
 
                 <h2>Your profile:</h2>
-                <p>Name: {{ userFullName }}</p>
-                <p>Email: {{ userEmail }}</p>
-                <p>Are you a DM?: {{ userDm }}</p>
-                <p>Party Id: {{partyId}}</p>
+                <p>Name: {{ user.username }}</p>
+                <p>Email: {{ user.email }}</p>
+
+                <p *ngIf="user.isDM; else notDM">Are you a DM?: Yes</p>
+                <ng-template #notDM><p>Are you a DM?: Not yet</p></ng-template>
+
+                <p *ngIf="user.partyId != 0">Party Id: {{user.partyId}}</p>
 
             </div>
 
             <div class="character-list">
                 <ul>
-                    <li *ngFor="let char of chars">
+                    <li *ngFor="let char of characters">
                         Character name: {{ char.characterName }}
-                        Race: {{ char.race }}, Class: {{ char.char_class }}
+                        Race: {{ char.race }}, Class: {{ char.charClass }}
                         Level: {{ char.level }}, Exp: {{ char.experience }}, Alignment: {{ char.alignment }}
                         Str: {{ char.strength }}, Dex: {{ char.dexterity }}, Con: {{ char.constitution }}
                         Int: {{ char.intelligence }}, Wis: {{ char.wisdom }}, Cha: {{ char.charisma }}

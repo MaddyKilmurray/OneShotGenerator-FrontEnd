@@ -1,8 +1,9 @@
+import { User } from 'src/app/models/user.model';
+import { UserService } from './../../service/user.service';
 import { FullCharacter } from './../../models/fullCharacter';
 import { HttpClient } from '@angular/common/http';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-profile',
@@ -12,18 +13,19 @@ import { User } from 'src/app/models/user';
 export class ProfileComponent implements OnInit {
   
   isAuthenticated: boolean = false;
-  userFullName: string | undefined;
+  userName: string | undefined;
   userEmail: string | undefined;
   userDm:string | undefined;
   partyId:string | undefined;
 
-  chars:FullCharacter[]
-
+  characters:FullCharacter[]
+  user:User;
 
   constructor(private oktaAuth:OktaAuth,
-    private http:HttpClient) { 
+    private http:HttpClient, private userService:UserService) { 
 
-      this.chars = [];
+      this.characters = [];
+      this.user = new User('',0,'',false);
     }
 
     async ngOnInit() {
@@ -31,14 +33,28 @@ export class ProfileComponent implements OnInit {
   
       const userToken = await this.oktaAuth.getIdToken();
   
-      this.userFullName = userClaims.given_name + " " + userClaims.family_name;
-      this.userEmail = userClaims.email;
-      this.userDm = userClaims.locale;
+      this.userEmail = userClaims.preferred_username;
+
+      this.getUser(this.userEmail!);
+      this.retrieveCharacters();
     }
 
-    // retrieve the users characters
-    retrieveCharacters() : void {
+    getUser(email:string) {
+      this.userService.getCurrentUser(email).subscribe(
+        result => {
+          this.user = result
+        }
+      )
+    }
 
+    retrieveCharacters() : void {
+      console.log(this.userEmail)
+      this.userService.getCharacters(this.userEmail!).subscribe(
+        result => {
+          this.characters = result;
+          console.log(this.characters);
+        }
+      )
     }
 
 }

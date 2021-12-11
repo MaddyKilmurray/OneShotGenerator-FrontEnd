@@ -1,8 +1,11 @@
+import { CharacterService } from './../../service/character.service';
+import { FullCharacter } from './../../models/fullCharacter';
 import { UserService } from './../../service/user.service';
 import { RandomiserService } from './../../service/randomiser.service';
 import { Component, OnInit } from '@angular/core';
 import { OktaAuthStateService } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -11,41 +14,66 @@ import { OktaAuth } from '@okta/okta-auth-js';
 })
 export class HomeComponent implements OnInit {
 
+  user:User;
 
   userName: string | undefined
   email: string | undefined;
-  emailValidated: boolean;
+  emailValidated: boolean = true;
+
+  characters:FullCharacter[]
 
   constructor(public oktaAuth: OktaAuth, public authService: OktaAuthStateService,
-    public userService:UserService) {
-      this.emailValidated = false;
+    public userService: UserService, public charService: CharacterService) {
+      this.user = new User('',0,'',false);
+      this.characters = [];
   }
 
   async ngOnInit() {
-    const userClaims = await this.oktaAuth.getUser()
+    if (this.oktaAuth.authStateManager.getAuthState()?.isAuthenticated) {
 
-    const userToken = await this.oktaAuth.getIdToken();
+      const userClaims = await this.oktaAuth.getUser()
 
-    this.userName = userClaims.given_name + " " + userClaims.family_name;
-    this.email = userClaims.email;
-    
+      const userToken = await this.oktaAuth.getIdToken();
+
+      this.userName = userClaims.given_name + " " + userClaims.family_name;
+      this.email = userClaims.preferred_username;
+
+      this.validateEmail();
+      this.getUser(this.email!);
+      this.getCharacters();
+    }
   }
 
-  validateEmail() : void { 
+  async validateEmail() {
     this.userService.validateEmail(this.email!).subscribe(
       result => {
         this.emailValidated = result;
+        if (!this.emailValidated) {
+          this.userService.createUser(this.userName!, this.email!, false, 0).subscribe(
+            result => {
+
+            }
+          )
+        }
+      }
+    )
+
+  }
+
+  getUser(email:string) {
+    this.userService.getCurrentUser(email).subscribe(
+      result => {
+        this.user = result
       }
     )
   }
 
-  saveUser() {
-    if (this.emailValidated) {
-      this.userService.createUser(this.userName!,this.email!,false,0).subscribe(
-        result => {
-          console.log("User saved");
-        }
-      )
-    }
+  getCharacters() : void {
+    this.userService.getCharacters(this.email!).subscribe(
+      result => {
+        this.characters = result;
+        console.log(this.characters);
+      }
+    )
   }
 }

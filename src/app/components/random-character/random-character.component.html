@@ -32,7 +32,13 @@
             Alignment: {{ fullCharacter.alignment }} <br />
             Starter Weapon: {{ fullCharacter.startingWeapon }} <br />
             Starter Armour: {{ fullCharacter.startingArmour }} <br />
+            Starter Gear: {{ fullCharacter.startingGear }} <br />
+            Starter Trinket: {{ fullCharacter.startingTrinket }} <br />
         </div>
+
+        <button class="save-char" (click)="saveCharacter()">
+            Save Character
+        </button>
 
     </div>
 </div>

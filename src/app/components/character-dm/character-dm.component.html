@@ -1,27 +1,48 @@
 <div class="main">
 
-    <h2>What would you like to do?</h2>
+    <div class="body">
 
-    <div class="splitter">
-        <div class="main-body">
-            <h2>Create new Party ID</h2>
-            <form class="partyForm" [formGroup]="partyForm">
-                <mat-form-field class="example-will-width" appearance="standard">
-                    <mat-label>Party ID must be at least 6 digits</mat-label>
-                    <input type="number" matInput formControlName="partyId" placeholder="Party ID...">
-                    <mat-error *ngIf="partyId.invalid && partyId.touched">
-                        Please enter a valid party ID
-                    </mat-error>
-                </mat-form-field>
-            </form>
-            <button class="submit" (click)="onSubmit()"><p>Submit</p></button>
-        </div>
+        <h2>What would you like to do?</h2>
 
-        <div class="random-view">
-            <button class="link-right" routerLink="/player" routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact:true}">
-                <p>Create a random character</p>
-            </button>
+        <div class="splitter">
+            <div class="main-body">
+                <h2>Create new Party ID</h2>
+                <form class="partyForm" [formGroup]="partyForm">
+                    <mat-form-field class="example-will-width" appearance="standard">
+                        <mat-label>Party ID</mat-label>
+                        <input type="number" matInput formControlName="partyId" placeholder="Party ID...">
+                        <mat-error *ngIf="partyId.invalid && partyId.touched">
+                            Party ID must be at least 6 digits
+                        </mat-error>
+                    </mat-form-field>
+                </form>
+                <button class="submit" (click)="onSubmit()">
+                    <p>Submit</p>
+                </button>
+
+                <div class="divider" *ngIf="user.partyId != 0">
+                    <img class="divider_1" src="assets\divider.png"
+                        alt="A black page divider. Two black lines seperated by a black circle.">
+                </div>
+
+                <div class="partyId" *ngIf="user.partyId != 0">
+                    <h2>Current Party ID</h2>
+                    <p>{{user.partyId}}</p>
+                </div>
+
+                <div class="divider" *ngIf="user.partyId != 0">
+                    <img class="divider_1" src="assets\divider.png"
+                        alt="A black page divider. Two black lines seperated by a black circle.">
+                </div>
+
+            </div>
+
+            <div class="random-view">
+                <button class="link-right" routerLink="/player" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact:true}">
+                    <p>Create a random character</p>
+                </button>
+            </div>
         </div>
     </div>
 </div>

@@ -20,6 +20,8 @@ export class RandomCharacterComponent implements OnInit {
 
   fullCharacter: FullCharacter;
 
+  characterSaved:boolean = false;
+
   @Input() race!: string;
   @Input() class!: string;
   @Input() characterName!: string;
@@ -53,7 +55,7 @@ export class RandomCharacterComponent implements OnInit {
     this.characterService.generateCharacter(this.generatedCharacter).subscribe(result => {
       console.log(result)
       const fullCharacterResponse: FullCharacterInfo = result;
-      this.fullCharacter.player_id = fullCharacterResponse.playerId;
+      this.fullCharacter.playerId = fullCharacterResponse.playerId;
       this.fullCharacter.characterName = fullCharacterResponse.characterName;
       this.fullCharacter.level = fullCharacterResponse.level;
       this.fullCharacter.experience = fullCharacterResponse.experience;
@@ -72,11 +74,11 @@ export class RandomCharacterComponent implements OnInit {
       this.fullCharacter.proficiency = fullCharacterResponse.proficiency;
       this.fullCharacter.languages = fullCharacterResponse.languages;
       this.fullCharacter.traits = fullCharacterResponse.traits;
-      this.fullCharacter.char_class = fullCharacterResponse.charClass;
-      this.fullCharacter.hit_die = fullCharacterResponse.hitDice;
-      this.fullCharacter.class_skills = fullCharacterResponse.classSkills;
-      this.fullCharacter.class_proficiencies = fullCharacterResponse.classProficiencies;
-      this.fullCharacter.saving_throws = fullCharacterResponse.savingThrows;
+      this.fullCharacter.charClass = fullCharacterResponse.charClass;
+      this.fullCharacter.hitDie = fullCharacterResponse.hitDice;
+      this.fullCharacter.classSkills = fullCharacterResponse.classSkills;
+      this.fullCharacter.classProficiencies = fullCharacterResponse.classProficiencies;
+      this.fullCharacter.savingThrows = fullCharacterResponse.savingThrows;
       this.fullCharacter.spellcasting = fullCharacterResponse.spellcasting;
       this.fullCharacter.strength = fullCharacterResponse.strength;
       this.fullCharacter.dexterity = fullCharacterResponse.dexterity;
@@ -91,6 +93,12 @@ export class RandomCharacterComponent implements OnInit {
       this.fullCharacter.intelligenceModifier = fullCharacterResponse.intelligenceModifier;
       this.fullCharacter.wisdomModifier = fullCharacterResponse.wisdomModifier;
       this.fullCharacter.charismaModifier = fullCharacterResponse.charismaModifier;
+    })
+  }
+
+  saveCharacter(): void {
+    this.characterService.saveCharacter(this.fullCharacter).subscribe(result => {
+      console.log(result)
     })
   }
 
