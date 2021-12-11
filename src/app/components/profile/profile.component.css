@@ -4,7 +4,7 @@
     justify-content: center;
     align-content: center;
     width:100%;
-    height:100%;
+    height:fit-content;
     color: #06070e;
     font-family: 'Satisfy', cursive;
 }
@@ -28,7 +28,7 @@
 
 .splitter {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-content: center;
     padding: 5%
@@ -41,9 +41,52 @@
     align-content: center;
 }
 
+.character-list h1 {
+    text-align: center;
+    padding: 2%;
+}
+
+.profile h2 {
+    font-size: 250%;
+    text-align: center;
+}
+
+.profile p {
+    font-size: 100%;
+    text-align: center;
+}
+
 img {
     width: 20%;
     margin: auto;
     margin-top: 2%;
     margin-bottom: 2%;
+}
+
+.logo img {
+    width: 10%;
+}
+
+.character-list ul {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.char_img {
+    position: relative;
+    text-align: center;
+}
+
+.char_img img {
+    width: 75%;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

@@ -12,7 +12,6 @@ import { UserModelResponse } from 'src/app/models/backendUser';
 })
 export class CharacterCreaterComponent implements OnInit {
 
-  showDM:boolean;
 
   email: string | undefined;
 
@@ -20,7 +19,6 @@ export class CharacterCreaterComponent implements OnInit {
 
   constructor(public oktaAuth:OktaAuth, public userService:UserService,
     private snackbar:MatSnackBar) {
-    this.showDM = false;
     this.user = new UserModel(0,'',0,'',false);
   }
 
@@ -32,10 +30,6 @@ export class CharacterCreaterComponent implements OnInit {
       this.email = userClaims.preferred_username;
       this.getUser();
     }
-  }
-
-  switchDM(): void {
-    this.showDM = !this.showDM;
   }
 
   getUser() {

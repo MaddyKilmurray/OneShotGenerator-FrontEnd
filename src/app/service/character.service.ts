@@ -11,8 +11,13 @@ export class CharacterService {
 
   readonly gatewayUrl: string = "http://localhost:8000/api/create"
   readonly baseUrl: string = "http://localhost:8600/api/create";
+  readonly characterUrl: string = "http://localhost:8330/api/character"
 
   constructor(private http: HttpClient) { }
+
+  getCharactersByPartyId(partyId:number): Observable<FullCharacter[]> {
+    return this.http.get<FullCharacter[]>(this.characterUrl + "/" + partyId);
+  }
 
   generateCharacter(character: CharacterDetail): Observable<any> {
     const body = {

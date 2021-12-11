@@ -1,6 +1,6 @@
 <div class="main">
 
-    <div class="main-body" *ngIf="!showCustomView && !showRandomView">
+    <div class="main-body" *ngIf="!showRandomView">
         <h2 class="header">Time to create a character!</h2>
         <div class="splitter">
             <form class="charForm" [formGroup]="characterForm">
@@ -23,16 +23,43 @@
 
             </form>
 
-            <button class="link-right" (click)="switchRandomView()">
+            <button class="link-right" (click)="randomise()">
                 <p>Randomise your character</p>
             </button>
         </div>
-        <button class="back" (click)="sentBack()">
+
+        <div class="random_char" *ngIf="showCustomView">
+            Character name: {{ characterName.value }} <br />
+            Party ID: {{ partyId.value }}
+            <div class="generated-details">
+                <div class="race-details">
+                    Race: {{ generatedCharacter.race }} <br />
+                    Speed: {{ generatedCharacter.speed }} <br />
+                    Ability score: {{ generatedCharacter.abilityScore }} <br />
+                    Size: {{ generatedCharacter.size }} <br />
+                    Languages: {{ generatedCharacter.languages }} <br />
+                    Traits: {{ generatedCharacter.traits }} <br />
+                </div>
+                <br />
+                <div class="class-details">
+                    Class: {{ generatedCharacter.char_class }} <br />
+                    Hit die: {{ generatedCharacter.hit_die }} <br />
+                    Weapon proficiencies: {{ generatedCharacter.weaponProficiencies}} <br />
+                    Proficiency: {{ generatedCharacter.proficiency }} <br />
+                    Spellcasting: {{ generatedCharacter.spellcasting }}
+                </div>
+            </div>
+        </div>
+
+        <button class="generate" (click)="showRandomView = true">
+            Generate stats
+        </button>
+        <button class="back" (click)="reset()">
             Start again
         </button>
     </div>
 
     <div class="random-view" *ngIf="showRandomView">
-        <app-random-character [class]="randomClass()" [race]="randomRace()" [characterName]="characterName.value" [partyId]="partyId.value" [playerId]="user.id"></app-random-character>
+        <app-random-character [generatedCharacter]="generatedCharacter" [partyId]="partyId.value"></app-random-character>
     </div>
 </div>

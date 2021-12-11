@@ -9,20 +9,39 @@
                 <p>Email: {{ user.email }}</p>
 
                 <p *ngIf="user.isDM; else notDM">Are you a DM?: Yes</p>
-                <ng-template #notDM><p>Are you a DM?: Not yet</p></ng-template>
+                <ng-template #notDM>
+                    <p>Are you a DM?: Not yet</p>
+                </ng-template>
 
                 <p *ngIf="user.partyId != 0">Party Id: {{user.partyId}}</p>
 
+                <p>Number of characters: {{ characters.length }}</p>
+
+            </div>
+
+            <div class="divider">
+                <img src="assets\divider.png" alt="Black page divider, two black lines with a circle in the middle.">
             </div>
 
             <div class="character-list">
+                <h1>Your characters</h1>
                 <ul>
                     <li *ngFor="let char of characters">
-                        Character name: {{ char.characterName }}
-                        Race: {{ char.race }}, Class: {{ char.charClass }}
-                        Level: {{ char.level }}, Exp: {{ char.experience }}, Alignment: {{ char.alignment }}
-                        Str: {{ char.strength }}, Dex: {{ char.dexterity }}, Con: {{ char.constitution }}
-                        Int: {{ char.intelligence }}, Wis: {{ char.wisdom }}, Cha: {{ char.charisma }}
+                        <div class="char_img">
+                            <img src="assets/small_parchment.png" alt="Parchment scroll">
+                            <div class="centered">
+                                Character name: {{ char.characterName }} <br/>
+                                Race: {{ char.race }}, Class: {{ char.charClass }} <br/>
+                                Level: {{ char.level }}, Exp: {{ char.experience }}, <br/>
+                                Alignment: {{ char.alignment }} <br/>
+                                Str: {{ char.strength }}, {{ char.strengthModifier }} <br/>
+                                Dex: {{ char.dexterity }}, {{ char.dexterityModifier }} <br/>
+                                Con: {{ char.constitution }}, {{ char.constitutionModifier }} <br/>
+                                Int: {{ char.intelligence }}, {{ char.intelligenceModifier }} <br/>
+                                Wis: {{ char.wisdom }}, {{ char.wisdomModifier }} <br/>
+                                Cha: {{ char.charisma }}, {{ char.charismaModifier }} <br/>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

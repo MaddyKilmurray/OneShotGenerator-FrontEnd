@@ -2,38 +2,32 @@
 
     <div class="main-body">
 
-        Character name: {{ characterName}} <br />
+        Character name: {{ fullCharacter.characterName}} <br />
         Party ID: {{ partyId }}
         <div class="generated-details">
-            <div class="race-details">
-                Race: {{ generatedCharacter.race }} <br />
-                Speed: {{ generatedCharacter.speed }} <br />
-                Ability score: {{ generatedCharacter.abilityScore }} <br />
-                Size: {{ generatedCharacter.size }} <br />
-                Languages: {{ generatedCharacter.languages }} <br />
-                Traits: {{ generatedCharacter.traits }} <br />
-            </div>
-            <br />
-            <div class="class-details">
-                Class: {{ generatedCharacter.char_class }} <br />
-                Hit die: {{ generatedCharacter.hit_die }} <br />
-                Weapon proficiencies: {{ generatedCharacter.weaponProficiencies}} <br />
-                Proficiency: {{ generatedCharacter.proficiency }} <br />
-                Spellcasting: {{ generatedCharacter.spellcasting }}
-            </div>
-        </div>
-
-        <button class="roll-stats" (click)="generateCharacter()">
-            Roll stats
-        </button>
-
-        <br />
-        <div class="generated">
+            Race: {{ fullCharacter.race }} <br />
+            Speed: {{ fullCharacter.speed }} <br />
+            Ability score: {{ fullCharacter.abilityScore }} <br />
+            Size: {{ fullCharacter.size }} <br />
+            Languages: {{ fullCharacter.languages }} <br />
+            Traits: {{ fullCharacter.traits }} <br />
+            Class: {{ fullCharacter.charClass }} <br />
+            Hit die: {{ fullCharacter.hitDie }} <br />
+            Weapon proficiencies: {{ fullCharacter.weaponProficiencies}} <br />
+            Proficiency: {{ fullCharacter.proficiency }} <br />
+            Spellcasting: {{ fullCharacter.spellcasting }}
             Alignment: {{ fullCharacter.alignment }} <br />
             Starter Weapon: {{ fullCharacter.startingWeapon }} <br />
             Starter Armour: {{ fullCharacter.startingArmour }} <br />
             Starter Gear: {{ fullCharacter.startingGear }} <br />
             Starter Trinket: {{ fullCharacter.startingTrinket }} <br />
+
+            Str: {{ fullCharacter.strength }}, {{ fullCharacter.strengthModifier }} <br />
+            Dex: {{ fullCharacter.dexterity }}, {{ fullCharacter.dexterityModifier }} <br />
+            Con: {{ fullCharacter.constitution }}, {{ fullCharacter.constitutionModifier }} <br />
+            Int: {{ fullCharacter.intelligence }}, {{ fullCharacter.intelligenceModifier }} <br />
+            Wis: {{ fullCharacter.wisdom }}, {{ fullCharacter.wisdomModifier }} <br />
+            Cha: {{ fullCharacter.charisma }}, {{ fullCharacter.charismaModifier }} <br />
         </div>
 
         <button class="save-char" (click)="saveCharacter()">

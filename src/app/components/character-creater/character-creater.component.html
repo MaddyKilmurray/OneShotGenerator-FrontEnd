@@ -1,7 +1,7 @@
 <div class="main">
 
-    <div class="main-body" *ngIf="!showDM">
-        <div class="general" *ngIf="user.isDM; else dmSection">
+    <div class="main-body">
+        <div class="general" *ngIf="!user.isDM; else dmSection">
             <h2 class="header">Will you be a...?</h2>
             <div class="splitter">
                 <button class="link-left" routerLink="/gamemaster" routerLinkActive="active"

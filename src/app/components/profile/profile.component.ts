@@ -4,6 +4,7 @@ import { FullCharacter } from './../../models/fullCharacter';
 import { HttpClient } from '@angular/common/http';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { Component, OnInit } from '@angular/core';
+import { UserModelResponse } from 'src/app/models/backendUser';
 
 @Component({
   selector: 'app-profile',
@@ -35,14 +36,19 @@ export class ProfileComponent implements OnInit {
   
       this.userEmail = userClaims.preferred_username;
 
-      this.getUser(this.userEmail!);
+      this.getUser();
       this.retrieveCharacters();
     }
 
-    getUser(email:string) {
-      this.userService.getCurrentUser(email).subscribe(
+    getUser() {
+      this.userService.getCurrentUser(this.userEmail!).subscribe(
         result => {
-          this.user = result
+          const userModel:UserModelResponse = result;
+          this.user.id = userModel.id;
+          this.user.username = userModel.username;
+          this.user.partyId = userModel.partyId;
+          this.user.email = userModel.email;
+          this.user.isDM = userModel.dm;
         }
       )
     }
