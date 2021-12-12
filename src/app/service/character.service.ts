@@ -91,4 +91,8 @@ export class CharacterService {
     // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(this.baseUrl + "/save", body);
   }
+
+  delete(id:number): Observable<any> {
+    return this.http.delete<any>(this.characterUrl + "/delete/" + id)
+  }
 }

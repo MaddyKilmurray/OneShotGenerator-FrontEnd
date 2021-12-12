@@ -1,3 +1,4 @@
+import { CharacterService } from './../../service/character.service';
 import { UserModel } from 'src/app/models/user.model';
 import { UserService } from './../../service/user.service';
 import { FullCharacter } from './../../models/fullCharacter';
@@ -23,7 +24,8 @@ export class ProfileComponent implements OnInit {
   user:UserModel;
 
   constructor(private oktaAuth:OktaAuth,
-    private http:HttpClient, private userService:UserService) { 
+    private http:HttpClient, private userService:UserService,
+    private charService:CharacterService) { 
 
       this.characters = [];
       this.user = new UserModel(0,'',0,'',false);
@@ -59,6 +61,14 @@ export class ProfileComponent implements OnInit {
         result => {
           this.characters = result;
           console.log(this.characters);
+        }
+      )
+    }
+
+    delete(id:number):void {
+      this.charService.delete(id).subscribe(
+        result => {
+          this.retrieveCharacters();
         }
       )
     }

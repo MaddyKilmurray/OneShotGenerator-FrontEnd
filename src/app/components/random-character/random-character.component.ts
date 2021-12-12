@@ -31,7 +31,7 @@ export class RandomCharacterComponent implements OnInit {
   constructor(private dndService: DndApiService, private characterService: CharacterService,
     private snackbar: MatSnackBar) {
 
-    this.fullCharacter = new FullCharacter(0, '', 0, 0, 0, '', '', '', '', '', 0, '', 0, '', 0, '', '', '', '', '', '', 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    this.fullCharacter = new FullCharacter(0,0, '', 0, 0, 0, '', '', '', '', '', 0, '', 0, '', 0, '', '', '', '', '', '', 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   }
 
   ngOnInit(): void {
@@ -39,12 +39,12 @@ export class RandomCharacterComponent implements OnInit {
   }
 
   reset(): void {
-    this.fullCharacter = new FullCharacter(0, '', 0, 0, 0, '', '', '', '', '', 0, '', 0, '', 0, '', '', '', '', '', '', 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    this.fullCharacter = new FullCharacter(0,0, '', 0, 0, 0, '', '', '', '', '', 0, '', 0, '', 0, '', '', '', '', '', '', 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   }
 
 
   generateCharacter(): void {
-    this.fullCharacter = new FullCharacter(0, '', 0, 0, 0, '', '', '', '', '', 0, '', 0, '', 0, '', '', '', '', '', '', 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    this.fullCharacter = new FullCharacter(0,0, '', 0, 0, 0, '', '', '', '', '', 0, '', 0, '', 0, '', '', '', '', '', '', 0, 0, '', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     this.characterService.generateCharacter(this.generatedCharacter).subscribe(result => {
       console.log(result)
       const fullCharacterResponse: FullCharacterInfo = result;

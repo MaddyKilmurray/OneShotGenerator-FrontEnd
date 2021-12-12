@@ -1,4 +1,10 @@
 export class FullCharacter {
+    public get id(): number {
+        return this._id;
+    }
+    public set id(value: number) {
+        this._id = value;
+    }
     public get hitPoints(): number {
         return this._hitPoints;
     }
@@ -242,6 +248,7 @@ export class FullCharacter {
     
 
     constructor(
+        private _id: number,
         private _playerId: number,
         private _characterName: string,
         private _level: number,
