@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { Component, OnInit } from '@angular/core';
 import { UserModelResponse } from 'src/app/models/backendUser';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RandomiserService } from 'src/app/service/randomiser.service';
+import { Fact } from 'src/app/models/factModel';
 
 @Component({
   selector: 'app-profile',
@@ -20,12 +23,14 @@ export class ProfileComponent implements OnInit {
   userDm:string | undefined;
   partyId:string | undefined;
 
+  fact:string = '';
+
   characters:FullCharacter[]
   user:UserModel;
 
   constructor(private oktaAuth:OktaAuth,
-    private http:HttpClient, private userService:UserService,
-    private charService:CharacterService) { 
+    private http:HttpClient, private snackbar:MatSnackBar, private userService:UserService,
+    private charService:CharacterService, public randomService:RandomiserService) { 
 
       this.characters = [];
       this.user = new UserModel(0,'',0,'',false);
@@ -40,6 +45,7 @@ export class ProfileComponent implements OnInit {
 
       this.getUser();
       this.retrieveCharacters();
+      this.dragonFact();
     }
 
     getUser() {
@@ -71,6 +77,21 @@ export class ProfileComponent implements OnInit {
           this.retrieveCharacters();
         }
       )
+    }
+
+    dragonFact(): void {
+      this.randomService.dragon().subscribe(
+        result => {
+          const factResponse:Fact = result;
+          this.fact = factResponse.fact;
+        }
+      );
+    }
+  
+    dragon(): void {
+      this.snackbar.open(this.fact,"Close", {
+        duration: 3000
+      });
     }
 
 }

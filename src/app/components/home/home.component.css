@@ -42,12 +42,20 @@ img {
     margin-top: 5%;
 }
 
+.chars {
+    width: 100%;
+}
+
 .chars ul {
     display: flex;
     justify-content: center;
-    flex-direction: row-reverse;
+    flex-direction: row;
     flex-wrap: wrap;
     list-style: none;
+}
+
+.chars li {
+    width: 30%;
 }
 
 .char_img {
@@ -64,7 +72,7 @@ img {
 }
 
 .char_img img {
-    width: 60%;
+    width: 80%;
 }
 
 .centered {

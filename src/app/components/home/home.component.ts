@@ -1,3 +1,4 @@
+import { Fact } from './../../models/factModel';
 import { CharacterService } from './../../service/character.service';
 import { FullCharacter } from './../../models/fullCharacter';
 import { UserService } from './../../service/user.service';
@@ -7,6 +8,7 @@ import { OktaAuthStateService } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
 import { UserModel } from 'src/app/models/user.model';
 import { UserModelResponse } from 'src/app/models/backendUser';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -21,10 +23,13 @@ export class HomeComponent implements OnInit {
   email: string | undefined;
   emailValidated: boolean = true;
 
+  fact:string = '';
+
   characters:FullCharacter[]
 
   constructor(public oktaAuth: OktaAuth, public authService: OktaAuthStateService,
-    public userService: UserService, public charService: CharacterService) {
+    public userService: UserService, private snackbar:MatSnackBar, 
+    public charService: CharacterService, public randomService:RandomiserService) {
       this.user = new UserModel(0,'',0,'',false);
       this.characters = [];
   }
@@ -43,6 +48,7 @@ export class HomeComponent implements OnInit {
       this.getUser();
       this.getCharacters();
     }
+    this.dragonFact();
   }
 
   async validateEmail() {
@@ -81,5 +87,20 @@ export class HomeComponent implements OnInit {
         this.characters = result;
       }
     )
+  }
+  
+  dragonFact(): void {
+    this.randomService.dragon().subscribe(
+      result => {
+        const factResponse:Fact = result;
+        this.fact = factResponse.fact;
+      }
+    );
+  }
+
+  dragon(): void {
+    this.snackbar.open(this.fact,"Close", {
+      duration: 3000
+    });
   }
 }

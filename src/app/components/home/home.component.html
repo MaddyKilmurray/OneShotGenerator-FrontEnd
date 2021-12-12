@@ -17,7 +17,7 @@
                 <ul>
                     <li *ngFor="let char of characters">
                         <div class="char_img">
-                            <img src="assets/parchment.png" alt="Parchment scroll">
+                            <img src="assets/small_parchment.png" alt="Parchment scroll">
                             <div class="centered">
                                 <p>Character name: {{char.characterName}}</p>
                                 <p>Race: {{char.race}}</p>
@@ -66,7 +66,7 @@
 
         <div class="logo">
             <img src="assets\dragon.png"
-                alt="A blueish, reddish dragon, with two feet, has its wings extended and is roaring at you">
+                alt="A blueish, reddish dragon, with two feet, has its wings extended and is roaring at you" (click)="dragon()">
         </div>
 
     </div>

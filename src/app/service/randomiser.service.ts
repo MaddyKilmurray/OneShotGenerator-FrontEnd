@@ -34,4 +34,8 @@ export class RandomiserService {
   d100(): Observable<any> {
     return this.http.get<any>(this.baseUrl + "/d100");
   }
+
+  dragon(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "/dragon");
+  }
 }
