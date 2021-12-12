@@ -1,3 +1,4 @@
+import { CustomValidator } from './../../validators/custom-validators';
 import { UserService } from './../../service/user.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DndApiService } from './../../service/dnd-api.service';
@@ -46,7 +47,7 @@ export class CharacterPlayerComponent implements OnInit {
     this.generatedCharacter = new CharacterDetail(this.user.id,'','', 0, '', 0, '', '', '', '', '', '', 0, '', '', '', '');
 
     this.characterName = new FormControl('',[Validators.required]);
-    this.partyId = new FormControl((this.user.partyId != 0 ? this.user.partyId : ''),[Validators.required, Validators.minLength(6)]);
+    this.partyId = new FormControl((this.user.partyId != 0 ? this.user.partyId : ''),[Validators.required, CustomValidator.checkPartyID]);
 
     this.characterForm = new FormGroup ({
       characterName:this.characterName,
@@ -154,7 +155,7 @@ export class CharacterPlayerComponent implements OnInit {
   reset() {
     this.resetClass();
     this.resetRace();
-    this.characterForm.reset;
+    this.characterForm.reset();
     this.showCustomView = false;
   }
 

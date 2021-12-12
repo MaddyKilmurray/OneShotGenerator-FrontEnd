@@ -1,10 +1,30 @@
 <div class="main">
 
     <div class="main-body" *ngIf="!showRandomView">
-        <h2 class="header">Time to create a character!</h2>
+        <div class="intro">
+            <h2 class="header">Time to create a character!</h2>
+
+            <p>Creating a character is the first step in your D&D adventure.</p>
+
+            <p>Will you be a Dwarven rogue? What about a Tiefling sorceror? The options are endless.</p>
+
+            <p>With this generator, your race and class will automatically be randomised for you, and you can keep
+                randomising until you hit the character of your dreams. Weapons, armour, gear and trinkets are all
+                generated without bias, and they may be an odd fit, but it's a great way to add flavour to your one-shot character.
+            </p>
+
+            <p>A gnome with a spear? A bard kitted out with a priest's kit? Think about how your character may have
+                picked these up, and it makes a great starting point for your Games Master.
+            </p>
+
+            <p>Well, what are you waiting for? Create a character name, enter your party ID, if you have one, and see 
+                what you come up with. Good luck, adventurer!
+            </p>
+        </div>
         <div class="splitter">
             <form class="charForm" [formGroup]="characterForm">
 
+                <p class="label">Enter a name for your new character.</p>
                 <mat-form-field class="example-will-width" appearance="fill">
                     <mat-label>Character Name</mat-label>
                     <input type="text" matInput formControlName="characterName" placeholder="Name...">
@@ -13,53 +33,58 @@
                     </mat-error>
                 </mat-form-field>
 
+                <p class="label">Already have a party? Enter your six digit Party ID here</p>
                 <mat-form-field class="example-will-width" appearance="fill">
                     <mat-label>Set Your Party ID</mat-label>
                     <input type="number" matInput formControlName="partyId" placeholder="Party ID...">
-                    <mat-error *ngIf="partyId.invalid && partyId.touched">
+                    <mat-error *ngIf="partyId.hasError('invalidID') || (partyId.invalid && partyId.touched)">
                         Your party ID must be 6 or more digits
                     </mat-error>
                 </mat-form-field>
+                <p class="label">Beware: Without a Party ID, your GM won't see your character!</p>
 
             </form>
 
-            <button class="link-right" (click)="randomise()">
-                <p>Randomise your character</p>
+            <button class="randomise" (click)="randomise()">
+                Randomise your character
             </button>
         </div>
 
         <div class="random_char" *ngIf="showCustomView">
-            Character name: {{ characterName.value }} <br />
-            Party ID: {{ partyId.value }}
+            <h3>Character name: {{ characterName.value }} </h3> <br />
+            <h3>Party ID: {{ partyId.value }}</h3>
             <div class="generated-details">
                 <div class="race-details">
-                    Race: {{ generatedCharacter.race }} <br />
-                    Speed: {{ generatedCharacter.speed }} <br />
-                    Ability score: {{ generatedCharacter.abilityScore }} <br />
-                    Size: {{ generatedCharacter.size }} <br />
-                    Languages: {{ generatedCharacter.languages }} <br />
-                    Traits: {{ generatedCharacter.traits }} <br />
+                    <h5>Race:</h5>{{ generatedCharacter.race }} <br />
+                    <h5>Speed:</h5>{{ generatedCharacter.speed }} <br />
+                    <h5>Ability score:</h5>{{ generatedCharacter.abilityScore }} <br />
+                    <h5>Size:</h5>{{ generatedCharacter.size }} <br />
+                    <h5>Languages:</h5>{{ generatedCharacter.languages }} <br />
+                    <h5>Traits:</h5>{{ generatedCharacter.traits }} <br />
                 </div>
                 <br />
                 <div class="class-details">
-                    Class: {{ generatedCharacter.char_class }} <br />
-                    Hit die: {{ generatedCharacter.hit_die }} <br />
-                    Weapon proficiencies: {{ generatedCharacter.weaponProficiencies}} <br />
-                    Proficiency: {{ generatedCharacter.proficiency }} <br />
-                    Spellcasting: {{ generatedCharacter.spellcasting }}
+                    <h5>Class:</h5>{{ generatedCharacter.char_class }} <br />
+                    <h5>Hit die:</h5>{{ generatedCharacter.hit_die }} <br />
+                    <h5>Weapon proficiencies:</h5>{{ generatedCharacter.weaponProficiencies}} <br />
+                    <h5>Proficiency:</h5>{{ generatedCharacter.proficiency }} <br />
+                    <h5>Spellcasting:</h5>{{ generatedCharacter.spellcasting }}
                 </div>
             </div>
         </div>
 
-        <button class="generate" (click)="showRandomView = true">
-            Generate stats
-        </button>
-        <button class="back" (click)="reset()">
-            Start again
-        </button>
+        <div class="buttons">
+            <button class="generate" (click)="showRandomView = true" *ngIf="showCustomView">
+                Generate stats
+            </button>
+            <button class="back" (click)="reset()" *ngIf="showCustomView">
+                Start again
+            </button>
+        </div>
     </div>
 
     <div class="random-view" *ngIf="showRandomView">
-        <app-random-character [generatedCharacter]="generatedCharacter" [partyId]="partyId.value"></app-random-character>
+        <app-random-character [generatedCharacter]="generatedCharacter" [partyId]="partyId.value">
+        </app-random-character>
     </div>
 </div>

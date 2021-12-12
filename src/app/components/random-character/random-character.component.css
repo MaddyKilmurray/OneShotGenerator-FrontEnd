@@ -71,6 +71,35 @@ button {
     font-size: 40%;
 }
 
+.generated-details h5 {
+    font-family: 'Satisfy', cursive;
+    text-decoration: underline;
+    font-size: 120%;
+    line-height: 1;
+    margin: 1%;
+    padding: 0;
+    padding-top: 2%;
+}
+
+.generated-details {
+    text-align: center;
+}
+
+.main-body h3 {
+    text-align: center;
+    font-family: 'Satisfy', cursive;
+    padding: 0;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.stats {
+    width: 70%;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
 @media only screen and (max-width: 600px) {
     .main-body {
         padding-bottom: 10%;
