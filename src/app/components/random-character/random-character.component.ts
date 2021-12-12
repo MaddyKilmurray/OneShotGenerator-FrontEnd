@@ -3,8 +3,15 @@ import { FullCharacterInfo } from './../../models/fullCharacter.model';
 import { CharacterService } from './../../service/character.service';
 import { FullCharacter } from './../../models/fullCharacter';
 import { DndApiService } from './../../service/dnd-api.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CharacterDetail } from 'src/app/models/characterDetail.model';
+
+declare var require: any;
+
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from "pdfmake/build/vfs_fonts";
+const htmlToPdfmake = require("html-to-pdfmake");
+(pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-random-character',
@@ -93,4 +100,16 @@ export class RandomCharacterComponent implements OnInit {
       });
     })
   }
+
+  @ViewChild('pdfTable')
+  pdfTable!: ElementRef;
+  
+  public downloadAsPDF() {
+    const pdfTable = this.pdfTable.nativeElement;
+    var html = htmlToPdfmake(pdfTable.innerHTML);
+    const documentDefinition = { content: html };
+    pdfMake.createPdf(documentDefinition).download(); 
+     
+  }
+
 }
