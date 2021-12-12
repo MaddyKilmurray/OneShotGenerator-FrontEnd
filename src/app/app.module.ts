@@ -24,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
+import { CharacterViewerComponent } from './components/character-viewer/character-viewer.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MatRadioModule } from '@angular/material/radio';
     CharacterPlayerComponent,
     RandomCharacterComponent,
     ProfileComponent,
-    DefaultComponent
+    DefaultComponent,
+    CharacterViewerComponent
   ],
   imports: [
     BrowserModule,

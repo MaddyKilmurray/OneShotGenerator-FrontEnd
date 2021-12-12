@@ -15,10 +15,10 @@
                             Party ID must be at least 6 digits
                         </mat-error>
                     </mat-form-field>
+                    <button class="submit" (click)="onSubmit()">
+                        <p>Submit</p>
+                    </button>
                 </form>
-                <button class="submit" (click)="onSubmit()">
-                    <p>Submit</p>
-                </button>
 
                 <div class="divider" *ngIf="user.partyId != 0">
                     <img class="divider_1" src="assets\divider.png"
@@ -44,28 +44,29 @@
                 </button>
             </div>
         </div>
-    </div>
-
-    <div class="partyChars" *ngIf="user.isDM && characters.length > 0">
-        <ul>
-            <li *ngFor="let char of characters">
-                <div class="char_img">
-                    <img src="assets/small_parchment.png" alt="Parchment scroll">
-                    <div class="centered">
-                        Character name: {{ char.characterName }} <br/>
-                        Race: {{ char.race }}, Class: {{ char.charClass }} <br/>
-                        Level: {{ char.level }}, Exp: {{ char.experience }}, <br/>
-                        Alignment: {{ char.alignment }} <br/>
-                        Str: {{ char.strength }}, {{ char.strengthModifier }}
-                        Dex: {{ char.dexterity }}, {{ char.dexterityModifier }} <br/>
-                        Con: {{ char.constitution }}, {{ char.constitutionModifier }}
-                        Int: {{ char.intelligence }}, {{ char.intelligenceModifier }} <br/>
-                        Wis: {{ char.wisdom }}, {{ char.wisdomModifier }}
-                        Cha: {{ char.charisma }}, {{ char.charismaModifier }} <br/>
+        
+        <div class="party-chars" *ngIf="characters.length > 0">
+            <ul>
+                <li *ngFor="let char of characters">
+                    <div class="char_img">
+                        <img src="assets/small_parchment.png" alt="Parchment scroll">
+                        <div class="centered">
+                            Player username: {{ char.playerUsername }} <br/>
+                            Character name: {{ char.characterName }} <br/>
+                            Race: {{ char.race }}, Class: {{ char.charClass }} <br/>
+                            Level: {{ char.level }}, Exp: {{ char.experience }}, <br/>
+                            Alignment: {{ char.alignment }} <br/>
+                            Str: {{ char.strength }}, {{ char.strengthModifier }}
+                            Dex: {{ char.dexterity }}, {{ char.dexterityModifier }} <br/>
+                            Con: {{ char.constitution }}, {{ char.constitutionModifier }}
+                            Int: {{ char.intelligence }}, {{ char.intelligenceModifier }} <br/>
+                            Wis: {{ char.wisdom }}, {{ char.wisdomModifier }}
+                            Cha: {{ char.charisma }}, {{ char.charismaModifier }} <br/>
+                        </div>
                     </div>
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
+        
     </div>
-
 </div>

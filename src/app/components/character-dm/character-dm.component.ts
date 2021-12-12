@@ -1,3 +1,4 @@
+import { FullCharacterWithUser } from './../../models/fullCharacterWithUser';
 import { CharacterService } from './../../service/character.service';
 import { FullCharacter } from './../../models/fullCharacter';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,7 +23,7 @@ export class CharacterDmComponent implements OnInit {
   partyId:FormControl;
 
   user:UserModel;
-  characters:FullCharacter[]
+  characters:FullCharacterWithUser[]
 
   constructor(public oktaAuth: OktaAuth,public userService:UserService,
     private snackbar:MatSnackBar, private characterService:CharacterService) { 
@@ -44,7 +45,6 @@ export class CharacterDmComponent implements OnInit {
       this.email = userClaims.preferred_username;
     }
     this.getUser();
-    this.getCharsByPartyId();
   }
 
   // writes partyID to DM user profile
@@ -68,17 +68,24 @@ export class CharacterDmComponent implements OnInit {
         this.user.partyId = userModel.partyId;
         this.user.email = userModel.email;
         this.user.isDM = userModel.dm;
+
+        this.getCharsByPartyId(userModel.partyId);
       }
     )
   }
 
-  getCharsByPartyId() : void {
+  getCharsByPartyId(partyId:number) : void {
     console.log(this.user.partyId);
-    this.characterService.getCharactersByPartyId(this.user.partyId).subscribe(
+    this.characterService.getCharactersByPartyIdWithUser(partyId).subscribe(
       result => {
         this.characters = result;
+        this.getUsersByChars();
       }
     )
+  }
+
+  getUsersByChars() {
+
   }
 
 }

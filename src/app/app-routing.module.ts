@@ -49,7 +49,7 @@ export function onAuthRequired(oktaAuth: OktaAuth, injector: Injector): void {
   router.navigate(['/login']);
 }
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -4,7 +4,7 @@ import { UserService } from './../../service/user.service';
 import { FullCharacter } from './../../models/fullCharacter';
 import { HttpClient } from '@angular/common/http';
 import { OktaAuth } from '@okta/okta-auth-js';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserModelResponse } from 'src/app/models/backendUser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RandomiserService } from 'src/app/service/randomiser.service';
@@ -16,7 +16,7 @@ import { Fact } from 'src/app/models/factModel';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  
+
   isAuthenticated: boolean = false;
   userName: string | undefined;
   userEmail: string | undefined;

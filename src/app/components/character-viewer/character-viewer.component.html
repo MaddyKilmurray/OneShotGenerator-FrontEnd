@@ -1,0 +1,72 @@
+<div class="main">
+
+    <div class="main-body">
+
+        <div class="char" id="pdfTable" #pdfTable>
+            <h3>Character name: {{ fullCharacter.characterName}}</h3> <br />
+            <h3>Party ID: {{ fullCharacter.partyId }}</h3>
+            <div class="generated-details">
+                <table class="stats">
+                    <tr>
+                        <th>Strength</th>
+                        <th>Dexterity</th>
+                        <th>Constitution</th>
+                        <th>Intelligence</th>
+                        <th>Wisdom</th>
+                        <th>Charisma</th>
+                    </tr>
+                    <tr>
+                        <td>{{ fullCharacter.strength }}</td>
+                        <td>{{ fullCharacter.dexterity }}</td>
+                        <td>{{ fullCharacter.constitution }}</td>
+                        <td>{{ fullCharacter.intelligence }}</td>
+                        <td>{{ fullCharacter.wisdom }}</td>
+                        <td>{{ fullCharacter.charisma }}</td>
+                    </tr>
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Modifier</th>
+                        <th>Modifier</th>
+                        <th>Modifier</th>
+                        <th>Modifier</th>
+                        <th>Modifier</th>
+                    </tr>
+                    <tr>
+                        <td>{{ fullCharacter.strengthModifier }}</td>
+                        <td>{{ fullCharacter.dexterityModifier }}</td>
+                        <td>{{ fullCharacter.constitutionModifier }}</td>
+                        <td>{{ fullCharacter.intelligenceModifier }}</td>
+                        <td>{{ fullCharacter.wisdomModifier }}</td>
+                        <td>{{ fullCharacter.charismaModifier }}</td>
+                    </tr>
+                </table>
+
+                <h5>Race: </h5>{{ fullCharacter.race }} <br />
+                <h5>Speed: </h5>{{ fullCharacter.speed }} <br />
+                <h5>Ability score: </h5>{{ fullCharacter.abilityScore }} <br />
+                <h5>Size: </h5>{{ fullCharacter.size }} <br />
+                <h5>Languages: </h5>{{ fullCharacter.languages }} <br />
+                <h5>Traits: </h5>{{ fullCharacter.traits }} <br />
+                <h5>Class: </h5>{{ fullCharacter.charClass }} <br />
+                <h5>Hit die: </h5>{{ fullCharacter.hitDie }} <br />
+                <h5>Weapon proficiencies: </h5>{{ fullCharacter.weaponProficiencies}} <br />
+                <h5>Proficiency: </h5>{{ fullCharacter.proficiency }} <br />
+                <h5>Spellcasting: </h5>{{ fullCharacter.spellcasting }}
+                <h5>Alignment: </h5>{{ fullCharacter.alignment }} <br />
+                <h5>Starter Weapon: </h5>{{ fullCharacter.startingWeapon }} <br />
+                <h5>Starter Armour: </h5>{{ fullCharacter.startingArmour }} <br />
+                <h5>Starter Gear: </h5>{{ fullCharacter.startingGear }} <br />
+                <h5>Starter Trinket: </h5>{{ fullCharacter.startingTrinket }} <br />
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="back" (click)="goBack()">
+                Back
+            </button>
+
+            <button class="export" (click)="downloadAsPDF();">Export To PDF</button>
+        </div>
+    </div>
+
+</div>

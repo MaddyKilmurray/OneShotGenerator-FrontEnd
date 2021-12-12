@@ -3,6 +3,7 @@ import { CharacterDetail } from './../models/characterDetail.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, enableProdMode } from '@angular/core';
 import { Observable } from 'rxjs';
+import { FullCharacterWithUser } from '../models/fullCharacterWithUser';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,11 @@ export class CharacterService {
   constructor(private http: HttpClient) { }
 
   getCharactersByPartyId(partyId:number): Observable<FullCharacter[]> {
-    return this.http.get<FullCharacter[]>(this.characterUrl + "/" + partyId);
+    return this.http.get<FullCharacter[]>(this.characterUrl + "/byPartyId/" + partyId);
+  }
+
+  getCharactersByPartyIdWithUser(partyId:number): Observable<FullCharacterWithUser[]> {
+    return this.http.get<FullCharacterWithUser[]>(this.characterUrl + "/user/byPartyId/" + partyId);
   }
 
   generateCharacter(character: CharacterDetail): Observable<any> {

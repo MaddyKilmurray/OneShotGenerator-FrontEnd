@@ -70,7 +70,7 @@ img {
 .character-list ul {
     display: flex;
     justify-content: center;
-    flex-direction: row-reverse;
+    flex-direction: row;
     flex-wrap: wrap;
     list-style: none;
 }

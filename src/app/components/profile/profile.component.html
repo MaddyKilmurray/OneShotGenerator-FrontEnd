@@ -42,6 +42,8 @@
                                 Cha: {{ char.charisma }}, {{ char.charismaModifier }} <br/>
                             </div>
                         </div>
+                        <button class="show">Show Details</button>
+                        <app-character-viewer [fullCharacter]="char"></app-character-viewer>
                         <button class="delete" (click)="delete(char.id)">Delete</button>
                     </li>
                 </ul>
