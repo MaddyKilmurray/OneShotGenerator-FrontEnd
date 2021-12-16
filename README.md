@@ -1,7 +1,5 @@
 <img src="https://github.com/MaddyKilmurray/OneShotGenerator_BackEnd/blob/main/OneShotGenerator.png" alt="An impressive, roaring dragon on a black background, with text in front. Text reads: 'One-Shot Generator: Created in Spring Boot and Angular. Written in Java, SQL, TypeScript, HTML,CSS and Javascript'">
 
-<img src="https://github.com/MaddyKilmurray/OneShotGenerator_BackEnd/blob/main/OneShotGenerator.png" alt="An impressive, roaring dragon on a black background, with text in front. Text reads: 'One-Shot Generator: Created in Spring Boot and Angular. Written in Java, SQL, TypeScript, HTML,CSS and Javascript'">
-
 ####
 
 #### All the fun of a Dungeons & Dragons game, without the heavy time commitment.
