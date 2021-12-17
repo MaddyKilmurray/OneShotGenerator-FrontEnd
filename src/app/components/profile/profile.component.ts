@@ -28,12 +28,15 @@ export class ProfileComponent implements OnInit {
   characters:FullCharacter[]
   user:UserModel;
 
+  showDetails:boolean;
+
   constructor(private oktaAuth:OktaAuth,
     private http:HttpClient, private snackbar:MatSnackBar, private userService:UserService,
     private charService:CharacterService, public randomService:RandomiserService) { 
 
       this.characters = [];
       this.user = new UserModel(0,'',0,'',false);
+      this.showDetails = false;
     }
 
     async ngOnInit() {
@@ -92,6 +95,10 @@ export class ProfileComponent implements OnInit {
       this.snackbar.open(this.fact,"Close", {
         duration: 3000
       });
+    }
+
+    switchShowDetails() {
+      this.showDetails = !this.showDetails;
     }
 
 }

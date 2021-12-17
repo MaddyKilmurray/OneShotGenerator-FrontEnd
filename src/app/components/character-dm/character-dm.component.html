@@ -45,6 +45,11 @@
             </div>
         </div>
         
+        <div class="buttons">
+            <button class="show" *ngIf="!showDetails; else hideDetails" (click)="switchShowDetails()">Show Details</button>
+            <ng-template #hideDetails><button class="show" (click)="switchShowDetails()">Hide Details</button></ng-template>
+        </div>
+
         <div class="party-chars" *ngIf="characters.length > 0">
             <ul>
                 <li *ngFor="let char of characters">
@@ -63,7 +68,9 @@
                             Wis: {{ char.wisdom }}, {{ char.wisdomModifier }}
                             Cha: {{ char.charisma }}, {{ char.charismaModifier }} <br/>
                         </div>
+
                     </div>
+                    <app-character-viewer *ngIf="showDetails" [fullCharacter]="toFull(char)"></app-character-viewer>
                 </li>
             </ul>
         </div>

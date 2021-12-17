@@ -30,21 +30,24 @@
                         <div class="char_img">
                             <img src="assets/small_parchment.png" alt="Parchment scroll">
                             <div class="centered">
-                                Character name: {{ char.characterName }} <br/>
-                                Race: {{ char.race }}, Class: {{ char.charClass }} <br/>
-                                Level: {{ char.level }}, Exp: {{ char.experience }}, <br/>
-                                Alignment: {{ char.alignment }} <br/>
-                                Str: {{ char.strength }}, {{ char.strengthModifier }} <br/>
-                                Dex: {{ char.dexterity }}, {{ char.dexterityModifier }} <br/>
-                                Con: {{ char.constitution }}, {{ char.constitutionModifier }} <br/>
-                                Int: {{ char.intelligence }}, {{ char.intelligenceModifier }} <br/>
-                                Wis: {{ char.wisdom }}, {{ char.wisdomModifier }} <br/>
-                                Cha: {{ char.charisma }}, {{ char.charismaModifier }} <br/>
+                                Character name: {{ char.characterName }} <br />
+                                Race: {{ char.race }}, Class: {{ char.charClass }} <br />
+                                Level: {{ char.level }}, Exp: {{ char.experience }}, <br />
+                                Alignment: {{ char.alignment }} <br />
+                                Str: {{ char.strength }}, {{ char.strengthModifier }} <br />
+                                Dex: {{ char.dexterity }}, {{ char.dexterityModifier }} <br />
+                                Con: {{ char.constitution }}, {{ char.constitutionModifier }} <br />
+                                Int: {{ char.intelligence }}, {{ char.intelligenceModifier }} <br />
+                                Wis: {{ char.wisdom }}, {{ char.wisdomModifier }} <br />
+                                Cha: {{ char.charisma }}, {{ char.charismaModifier }} <br />
                             </div>
                         </div>
-                        <button class="show">Show Details</button>
-                        <app-character-viewer [fullCharacter]="char"></app-character-viewer>
-                        <button class="delete" (click)="delete(char.id)">Delete</button>
+                        <div class="buttons">
+                            <button class="show" *ngIf="!showDetails; else hideDetails" (click)="switchShowDetails()">Show Details</button>
+                            <ng-template #hideDetails><button class="show" (click)="switchShowDetails()">Hide Details</button></ng-template>
+                            <button class="delete" (click)="delete(char.id)">Delete</button>
+                        </div>
+                        <app-character-viewer *ngIf="showDetails" [fullCharacter]="char"></app-character-viewer>
                     </li>
                 </ul>
             </div>
@@ -52,7 +55,8 @@
 
         <div class="logo">
             <img src="assets\dragon.png"
-                alt="A blueish, reddish dragon, with two feet, has its wings extended and is roaring at you" (click)="dragon()">
+                alt="A blueish, reddish dragon, with two feet, has its wings extended and is roaring at you"
+                (click)="dragon()">
         </div>
     </div>
 

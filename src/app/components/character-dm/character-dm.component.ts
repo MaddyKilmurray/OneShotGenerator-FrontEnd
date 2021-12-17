@@ -24,6 +24,7 @@ export class CharacterDmComponent implements OnInit {
 
   user:UserModel;
   characters:FullCharacterWithUser[]
+  showDetails: boolean;
 
   constructor(public oktaAuth: OktaAuth,public userService:UserService,
     private snackbar:MatSnackBar, private characterService:CharacterService) { 
@@ -35,6 +36,7 @@ export class CharacterDmComponent implements OnInit {
 
     this.user = new UserModel(0,'',0,'',false);
     this.characters = [];
+    this.showDetails = false;
   }
 
   async ngOnInit() {
@@ -86,6 +88,20 @@ export class CharacterDmComponent implements OnInit {
 
   getUsersByChars() {
 
+  }
+
+  switchShowDetails() {
+    this.showDetails = !this.showDetails;
+  }
+
+  toFull(char:FullCharacterWithUser):FullCharacter {
+    var newChar:FullCharacter = new FullCharacter(char.id,char.playerId,char.characterName,char.level,char.partyId,char.experience,
+      char.alignment,char.startingWeapon,char.startingArmour,char.startingGear,char.startingTrinket,char.numberOfHitDice,char.race,char.speed,
+      char.abilityScore,char.abilityBonus,char.size,char.weaponProficiencies,char.proficiency,char.languages,char.traits,char.charClass,char.hitDie,
+      char.hitPoints,char.classSkills,char.classProficiencies,char.savingThrows,char.spellcasting,char.strength,char.dexterity,char.constitution,
+      char.intelligence,char.wisdom,char.charisma,char.armourClass,char.strengthModifier,char.dexterityModifier,char.constitutionModifier,char.intelligenceModifier,
+      char.wisdomModifier,char.charismaModifier);
+    return newChar;
   }
 
 }

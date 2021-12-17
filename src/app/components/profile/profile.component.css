@@ -97,7 +97,12 @@ img {
     flex-direction: column;
 }
 
-.delete {
+.delete, .show {
     width: 40%;
     margin: auto;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
 }
